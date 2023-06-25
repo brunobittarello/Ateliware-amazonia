@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Ateliware_amazonia": {
+    "AteliwareAmazonia": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

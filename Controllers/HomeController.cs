@@ -1,20 +1,24 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Ateliware_amazonia.Models;
+using AteliwareAmazonia.Models;
+using AteliwareAmazonia.Services;
 
-namespace Ateliware_amazonia.Controllers;
+namespace AteliwareAmazonia.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private CoordinatesLoader _loader;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, CoordinatesLoader loader)
     {
         _logger = logger;
+        _loader = loader;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        await _loader.Load();
         return View();
     }
 

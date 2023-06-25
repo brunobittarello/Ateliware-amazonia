@@ -1,4 +1,4 @@
-namespace Ateliware_amazonia.Models;
+namespace AteliwareAmazonia.Models;
 
 public class ErrorViewModel
 {

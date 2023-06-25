@@ -25,6 +25,13 @@ public class CoordinateService
             return new RouteDto() { Errors = error };
         }
 
+        if (start == pickUp && pickUp == destination)
+            return new RouteDto() { Time = 0, Links = new string[] { start, destination } };
+        if (start == pickUp)
+            return ShortestWay(coordinates, pickUp, destination);
+        if (destination == pickUp)
+            return ShortestWay(coordinates, start, pickUp);
+
         var startToPickUp = ShortestWay(coordinates, start, pickUp);
         var pickUpToDestination = ShortestWay(coordinates, pickUp, destination);
         return new RouteDto()

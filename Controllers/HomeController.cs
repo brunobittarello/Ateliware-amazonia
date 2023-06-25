@@ -23,15 +23,19 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<ShortestDestinationResponse> ShortestDestination(ShortestDestinationDto dataDto)
+    public async Task<ShortestDestinationResponse> ShortestDestination(ShortestDestinationViewModel dataDto)
     {
-        var route = await _coordinateService.CalculateRoute(dataDto.Start, dataDto.PickUp, dataDto.Destination);
+        var start = dataDto.Start.ToUpper();
+        var pickUp = dataDto.PickUp.ToUpper();
+        var destination = dataDto.Destination.ToUpper();
+
+        var route = await _coordinateService.CalculateRoute(start, pickUp, destination);
         if (!string.IsNullOrEmpty(route.Errors))
             return new ShortestDestinationResponse() { Errors = route.Errors };
 
         var routeResponse = new ShortestDestinationResponse();
-        AddIntoHistory(dataDto.Start, dataDto.PickUp, dataDto.Destination, route.Time);
-        routeResponse.RouteDescription = $"The set delivery will have the route {RouteLinksToString(route.Links)} , and will take {route.Time} seconds to be delivered as fast as possible.";
+        AddIntoHistory(start, pickUp, destination, route.Time);
+        routeResponse.RouteDescription = $"The set delivery will have the route {RouteLinksToString(route.Links)}, and will take {route.Time} seconds to be delivered as fast as possible.";
         routeResponse.History = _history.ToArray();
         return routeResponse;
     }

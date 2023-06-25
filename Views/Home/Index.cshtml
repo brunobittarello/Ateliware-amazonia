@@ -1,4 +1,4 @@
-﻿@model ShortestDestinationDto;
+﻿@model ShortestDestinationViewModel;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -23,6 +23,11 @@
         }
 
         function onRouteSuccess(data) {
+            if (data.errors != null && data.errors != "") {
+                showErrors(data.errors);
+                return;
+            }
+
             $("#route-result").html(data.routeDescription);
             showHistory(data.history)
         }
@@ -34,6 +39,11 @@
                 html += "<p>" + history[i] + "</p>"
             }
             $("#route-history").html(html);
+        }
+
+        function showErrors(errors) {
+            $("#modal-message-body").html(errors.replaceAll("\n", "<br>"));
+            $(".modal").modal("show");
         }
     </script>
 }
@@ -52,21 +62,24 @@
                             <label>Drone Start:</label>
                         </div>
                         <div class="col-6">
-                            <input asp-for="Start" class="form-control input-txt-primary" />
+                            <input asp-for="Start" class="form-control input-txt-primary"
+                                oninput="this.value = this.value.toUpperCase()" />
                             <span asp-validation-for="Start" class="text-danger"></span>
                         </div>
                         <div class="col-6">
                             <label>Object pick-up:</label>
                         </div>
                         <div class="col-6">
-                            <input asp-for="PickUp" class="form-control input-txt-primary" />
+                            <input asp-for="PickUp" class="form-control input-txt-primary"
+                                oninput="this.value = this.value.toUpperCase()" />
                             <span asp-validation-for="PickUp" class="text-danger"></span>
                         </div>
                         <div class="col-6">
                             <label>Delivery destination:</label>
                         </div>
                         <div class="col-6">
-                            <input asp-for="Destination" class="form-control input-txt-primary" />
+                            <input asp-for="Destination" class="form-control input-txt-primary"
+                                oninput="this.value = this.value.toUpperCase()" />
                             <span asp-validation-for="Destination" asp-vali class="text-danger"></span>
                         </div>
                     </div>
@@ -88,6 +101,26 @@
                 Last deliverieas:
             </div>
             <div id="route-history" class="col-12">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="modal-message-title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-color1">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-message-title">Warning</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-message-body" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
             </div>
         </div>
     </div>

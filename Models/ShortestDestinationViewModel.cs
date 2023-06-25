@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AteliwareAmazonia.Models;
 
-public class ShortestDestinationDto
+public class ShortestDestinationViewModel
 {
     [Required(ErrorMessage = "This field is required")]
     public string Start { get; set; }

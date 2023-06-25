@@ -1,5 +1,4 @@
 using System.Net;
-using System.Net.Http;
 using System.Text.Json;
 using AteliwareAmazonia.Models;
 
@@ -15,7 +14,7 @@ public class CoordinatesLoader
         _logger = logger;
     }
 
-    public async Task<List<Coordinate>?> Load()
+    public async Task<List<Coordinate>> Load()
     {
         var client = new HttpClient();
         var response = await client.GetAsync(SOURCE_URL);

@@ -27,11 +27,6 @@ public class HomeController : Controller
         return await _coordinateService.CalculateRoute(dataDto.Start, dataDto.PickUp, dataDto.Destination);
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

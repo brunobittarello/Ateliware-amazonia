@@ -15,7 +15,7 @@ public class CoordinatesLoader
         _logger = logger;
     }
 
-    public async Task<List<Coordinate>> Load()
+    public async Task<List<Coordinate>?> Load()
     {
         var client = new HttpClient();
         var response = await client.GetAsync(SOURCE_URL);
@@ -24,12 +24,33 @@ public class CoordinatesLoader
             LogResponse(response);
             return null;
         }
-        var responseBody = await response.Content.ReadAsStreamAsync();
-        var json = new StreamReader(responseBody).ReadToEnd();
-        var result = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, float>>>(json);
-        _logger.LogInformation(result.Keys.Count.ToString());
-        _logger.LogInformation(result["A1"]["A2"].ToString());
-        return null;
+        try
+        {
+            var responseBody = await response.Content.ReadAsStreamAsync();
+            var json = new StreamReader(responseBody).ReadToEnd();
+            var result = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, float>>>(json);
+            if (result == null)
+                throw new Exception("Json parse resulted in a null object");
+
+            return ConvertToCoordinates(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Coordinate loading failed");
+            return null;
+        }
+    }
+
+    List<Coordinate> ConvertToCoordinates(Dictionary<string, Dictionary<string, float>> dictionary)
+    {
+        var coordinates = new List<Coordinate>();
+        foreach (var dictCoord in dictionary)
+        {
+            coordinates.Add(
+                new Coordinate() { Name = dictCoord.Key, Links = dictCoord.Value }
+            );
+        }
+        return coordinates;
     }
 
     async void LogResponse(HttpResponseMessage response)

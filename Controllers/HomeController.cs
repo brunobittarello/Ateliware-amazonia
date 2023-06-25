@@ -8,18 +8,23 @@ namespace AteliwareAmazonia.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private CoordinatesLoader _loader;
+    private CoordinateService _coordinateService;
 
-    public HomeController(ILogger<HomeController> logger, CoordinatesLoader loader)
+    public HomeController(ILogger<HomeController> logger, CoordinateService coordinateService)
     {
         _logger = logger;
-        _loader = loader;
+        _coordinateService = coordinateService;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        await _loader.Load();
         return View();
+    }
+
+    [HttpPost]
+    public async Task<RouteDto> ShortestDestination([FromBody] ShortestDestinationDto dataDto)
+    {
+        return await _coordinateService.CalculateRoute(dataDto.Start, dataDto.PickUp, dataDto.Destination);
     }
 
     public IActionResult Privacy()

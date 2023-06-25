@@ -4,12 +4,12 @@ using AteliwareAmazonia.Models;
 
 namespace AteliwareAmazonia.Services;
 
-public class CoordinateService
+public class CoordinateService : ICoordinateService
 {
     private readonly ILogger _logger;
-    private readonly CoordinatesLoader _loader;
+    private readonly ICoordinatesLoader _loader;
 
-    public CoordinateService(ILogger<CoordinateService> logger, CoordinatesLoader loader)
+    public CoordinateService(ILogger<CoordinateService> logger, ICoordinatesLoader loader)
     {
         _logger = logger;
         _loader = loader;

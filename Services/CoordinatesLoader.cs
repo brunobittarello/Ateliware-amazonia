@@ -4,7 +4,7 @@ using AteliwareAmazonia.Models;
 
 namespace AteliwareAmazonia.Services;
 
-public class CoordinatesLoader
+public class CoordinatesLoader : ICoordinatesLoader
 {
     const string SOURCE_URL = "https://mocki.io/v1/10404696-fd43-4481-a7ed-f9369073252f";
     private readonly ILogger _logger;

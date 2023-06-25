@@ -4,8 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<CoordinatesLoader>();
-builder.Services.AddScoped<CoordinateService>();
+builder.Services.AddScoped<ICoordinatesLoader, CoordinatesLoader>();
+builder.Services.AddScoped<ICoordinateService, CoordinateService>();
 
 var app = builder.Build();
 

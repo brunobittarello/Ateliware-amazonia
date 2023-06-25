@@ -8,10 +8,10 @@ namespace AteliwareAmazonia.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private CoordinateService _coordinateService;
+    private ICoordinateService _coordinateService;
     private static List<string> _history = new List<string>();
 
-    public HomeController(ILogger<HomeController> logger, CoordinateService coordinateService)
+    public HomeController(ILogger<HomeController> logger, ICoordinateService coordinateService)
     {
         _logger = logger;
         _coordinateService = coordinateService;

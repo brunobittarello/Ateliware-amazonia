@@ -1,8 +1,94 @@
-﻿@{
+﻿@model ShortestDestinationDto;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#btnsubmit").click(askFastedRoute);
+        });
+
+        function askFastedRoute() {
+            var isValid = $("form").valid();
+            if (isValid === false)
+                return;
+
+            var data = $("form").serialize();
+            $.post("/home/ShortestDestination", data, onRouteSuccess);
+        }
+
+        function onRouteSuccess(data) {
+            $("#route-result").html(data.routeDescription);
+            showHistory(data.history)
+        }
+
+        function showHistory(history) {
+            $("#route-history-label").show();
+            var html = "";
+            for (var i = 0; i < history.length; i++) {
+                html += "<p>" + history[i] + "</p>"
+            }
+            $("#route-history").html(html);
+        }
+    </script>
+}
+
+<div class="row">
+    <h1 class="display-4 text-center p-5">Amazonia</h1>
+    <div class="route-panel col-11 col-md-8 p-5 mx-auto">
+        <form asp-action="Calc">
+            <div class="row gy-2">
+                <div class="col-12 col-md-8">
+                    <div class="row gy-2">
+                        <div class="col-12">
+                            <p>Input coordinates:</p>
+                        </div>
+                        <div class="col-6">
+                            <label>Drone Start:</label>
+                        </div>
+                        <div class="col-6">
+                            <input asp-for="Start" class="form-control input-txt-primary" />
+                            <span asp-validation-for="Start" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label>Object pick-up:</label>
+                        </div>
+                        <div class="col-6">
+                            <input asp-for="PickUp" class="form-control input-txt-primary" />
+                            <span asp-validation-for="PickUp" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label>Delivery destination:</label>
+                        </div>
+                        <div class="col-6">
+                            <input asp-for="Destination" class="form-control input-txt-primary" />
+                            <span asp-validation-for="Destination" asp-vali class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="row h-100 align-items-end">
+                        <button id="btnsubmit" type="button" class="btn btn-primary">
+                            Calculate fastest route!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row gy-2">
+            <div id="route-result" class="col-12 py-3">
+            </div>
+            <div id="route-history-label" class="col-12 py-2" style="display: none;">
+                Last deliverieas:
+            </div>
+            <div id="route-history" class="col-12">
+            </div>
+        </div>
+    </div>
 </div>

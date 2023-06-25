@@ -15,4 +15,31 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: linear-gradient(0deg, rgba(210, 182, 164, 1) 0%, rgba(215, 203, 210, 1) 50%, rgba(176, 169, 182, 1) 100%);
+}
+
+h1 {
+  -webkit-text-stroke: 0.1rem black;
+  text-shadow: #0f0f28 3px 3px;
+}
+
+.route-panel {
+  background-color: rgb(246, 226, 231);
+  border-radius: 1.3rem !important;
+  border: 0.1em solid rgba(15, 15, 40, 1);
+  box-shadow: rgba(15, 15, 40, 1) 0.2em 0.5em;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: black;
+  border-color: black;
+}
+
+.input-txt-primary {
+  background-color: rgb(0, 0, 0, 0);
+  border-color: black;
+  border-width: 2px;
+  width: 50%;
 }

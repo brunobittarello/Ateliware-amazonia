@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ateliware-amazonia", "AteliwareAmazonia.Amazonia\Ateliware-amazonia.csproj", "{44A8EB38-C62F-4F95-8B5E-EDCE5F9C33E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AteliwareAmazonia.Tests", "AteliwareAmazonia.Tests\AteliwareAmazonia.Tests.csproj", "{1F93ADD1-1430-4375-8392-6BBC9A471364}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44A8EB38-C62F-4F95-8B5E-EDCE5F9C33E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44A8EB38-C62F-4F95-8B5E-EDCE5F9C33E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44A8EB38-C62F-4F95-8B5E-EDCE5F9C33E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44A8EB38-C62F-4F95-8B5E-EDCE5F9C33E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F93ADD1-1430-4375-8392-6BBC9A471364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F93ADD1-1430-4375-8392-6BBC9A471364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F93ADD1-1430-4375-8392-6BBC9A471364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F93ADD1-1430-4375-8392-6BBC9A471364}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

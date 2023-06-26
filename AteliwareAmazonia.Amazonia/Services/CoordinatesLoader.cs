@@ -18,14 +18,14 @@ public class CoordinatesLoader : ICoordinatesLoader
     public async Task<List<Coordinate>> Load()
     {
         var client = new HttpClient();
-        var response = await client.GetAsync(_apiUrl);
-        if (response.StatusCode != HttpStatusCode.OK)
-        {
-            LogResponse(response);
-            return null;
-        }
         try
         {
+            var response = await client.GetAsync(_apiUrl);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                LogResponse(response);
+                return null;
+            }
             var responseBody = await response.Content.ReadAsStreamAsync();
             var json = new StreamReader(responseBody).ReadToEnd();
             var result = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, float>>>(json);

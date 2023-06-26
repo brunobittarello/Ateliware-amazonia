@@ -18,7 +18,7 @@ public class CoordinatesLoader : ICoordinatesLoader
     public async Task<List<Coordinate>> Load()
     {
         var client = new HttpClient();
-        var response = await client.GetAsync(SOURCE_URL);
+        var response = await client.GetAsync(_apiUrl);
         if (response.StatusCode != HttpStatusCode.OK)
         {
             LogResponse(response);

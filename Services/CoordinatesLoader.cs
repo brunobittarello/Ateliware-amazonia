@@ -6,12 +6,13 @@ namespace AteliwareAmazonia.Services;
 
 public class CoordinatesLoader : ICoordinatesLoader
 {
-    const string SOURCE_URL = "https://mocki.io/v1/10404696-fd43-4481-a7ed-f9369073252f";
+    private readonly string _apiUrl = "https://mocki.io/v1/10404696-fd43-4481-a7ed-f9369073252f";
     private readonly ILogger _logger;
 
-    public CoordinatesLoader(ILogger<CoordinatesLoader> logger)
+    public CoordinatesLoader(ILogger<CoordinatesLoader> logger, IConfiguration config)
     {
         _logger = logger;
+        _apiUrl = config["RoutesApiUrl"]?.ToString();
     }
 
     public async Task<List<Coordinate>> Load()
